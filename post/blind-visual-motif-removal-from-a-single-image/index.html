@@ -1,0 +1,379 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tech Notebook</title>
+<meta name="description" content="AI & Digital Frontier" />
+<link rel="shortcut icon" href="https://huia711.GitHub.io/favicon.ico?v=1730290531677">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://huia711.GitHub.io/styles/main.css">
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://huia711.GitHub.io">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://huia711.GitHub.io/images/avatar.png?v=1730290531677" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">Tech Notebook</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#font-colorbluetitlefont"><font color=blue><em>Title</em></font></a></li>
+<li><a href="#font-colorbluevenuefont"><font color=blue><em>Venue</em></font></a></li>
+<li><a href="#font-colorblueproblemfont"><font color=blue><em>Problem</em></font></a></li>
+<li><a href="#font-colorbluemotivationfont"><font color=blue><em>Motivation</em></font></a></li>
+<li><a href="#font-colorbluesignificancecontributionfont"><font color=blue><em>Significance/Contribution</em></font></a></li>
+<li><a href="#font-colorbluemethodfont"><font color=blue><em>Method</em></font></a>
+<ul>
+<li><a href="#goal"><strong>Goal</strong>:</a></li>
+<li><a href="#1-motif-embedding"><strong>1. Motif embedding</strong></a></li>
+<li><a href="#2-blind-visual-motif-removal">2. Blind visual motif removal</a></li>
+<li><a href="#3-network-architecture">3. Network architecture</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#">!</a><br>
+*
+<ul>
+<li><a href="#font-colorbluemarkable-resultsfont"><font color=blue><em>Markable results</em></font></a>
+<ul>
+<li><a href="#1-performance">1. Performance</a></li>
+<li><a href="#2-ablation-study">2. Ablation study</a></li>
+</ul>
+</li>
+<li><a href="#font-colorblueother-notesfont"><font color=blue><em>Other notes</em></font></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Powered by <a href="https://github.com/huia711" target="_blank">Github</a></div>
+    <a class="rss" href="https://huia711.GitHub.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">Blind Visual Motif Removal from a Single Image</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2024-01-31 / 4 min read
+        </div>
+        
+        <div class="post-content yue">
+          <h4 id="font-colorbluetitlefont"><font color=blue><em>Title</em></font></h4>
+<p>Blind Visual Motif Removal from a Single Image</p>
+<hr>
+<h4 id="font-colorbluevenuefont"><font color=blue><em>Venue</em></font></h4>
+<p>CVPR 2019</p>
+<hr>
+<h4 id="font-colorblueproblemfont"><font color=blue><em>Problem</em></font></h4>
+<ul>
+<li>Proposing a deep learning based technique for blind removal of such objects.</li>
+<li>In the blind setting, the location and exact geometry of the motif are unknown.</li>
+</ul>
+<hr>
+<h4 id="font-colorbluemotivationfont"><font color=blue><em>Motivation</em></font></h4>
+<ol>
+<li>Most <strong>watermark removal</strong> methods try to reconstruct a single watermarked image relying on user guidance to <strong>identify the location of the watermark</strong>.</li>
+<li>The performance degrades when the inpainting is performed blindly, <strong>without the mask of the missing pixels</strong>.</li>
+</ol>
+<hr>
+<h4 id="font-colorbluesignificancecontributionfont"><font color=blue><em>Significance/Contribution</em></font></h4>
+<ol>
+<li>Do not require multiple images with the same object, or the exact location of the motif pixels.
+<ol>
+<li>Separating the visual motif from the image, by first estimating which pixels contain the motif.</li>
+<li>Subsequently reconstructing the latent image.</li>
+<li>Reconstructing the visual motif.</li>
+</ol>
+</li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="https://huia711.GitHub.io/post-images/1706687069418.png" alt="" loading="lazy"></figure>
+<hr>
+<h4 id="font-colorbluemethodfont"><font color=blue><em>Method</em></font></h4>
+<h5 id="goal"><strong>Goal</strong>:</h5>
+<p>Using a convolutional neural network (CNN) trained to remove visual motifs embedded in an image.</p>
+<h5 id="1-motif-embedding"><strong>1. Motif embedding</strong></h5>
+<ul>
+<li>Matting a motif (Vm) onto an image (Im)
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span></span></span></span> is the spatially varying transparency
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>α</mi><mi>i</mi></msub><mo>∈</mo><mo>(</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">\alpha_i ∈ (0, 1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6891em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span> inside the motif region</li>
+<li>0 elsewhere</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>C</mi><mi>r</mi><mo>=</mo><mi>α</mi><mo>∘</mo><mi>V</mi><mi>m</mi><mo>+</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo>)</mo><mo>∘</mo><mi>I</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">C r=\alpha \circ V m+(1-\alpha) \circ I m
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∘</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∘</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault">m</span></span></span></span></span></p>
+<h5 id="2-blind-visual-motif-removal">2. Blind visual motif removal</h5>
+<ul>
+<li>One encoder and two decoder branches(<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mrow><mi>I</mi><mi>m</mi></mrow><mo stretchy="true">^</mo></mover></mrow><annotation encoding="application/x-tex">\widehat{I m}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.98333em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.98333em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault">m</span></span></span><span class="svg-align" style="top:-3.6833299999999998em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.3em;"><svg width='100%' height='0.3em' viewBox='0 0 2364 300' preserveAspectRatio='none'><path d='M1181 0h2l1171 176c6 0 10 5 10 11l-2 23c-1 6-5 10
+-11 10h-1L1182 67 15 220h-1c-6 0-10-4-11-10l-2-23c-1-6 4-11 10-11z'/></svg></span></span></span></span></span></span></span></span></span>、<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mrow><mi>M</mi><mi>a</mi></mrow><mo stretchy="true">^</mo></mover></mrow><annotation encoding="application/x-tex">\widehat{M a}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.98333em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.98333em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">a</span></span></span><span class="svg-align" style="top:-3.6833299999999998em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.3em;"><svg width='100%' height='0.3em' viewBox='0 0 2364 300' preserveAspectRatio='none'><path d='M1181 0h2l1171 176c6 0 10 5 10 11l-2 23c-1 6-5 10
+-11 10h-1L1182 67 15 220h-1c-6 0-10-4-11-10l-2-23c-1-6 4-11 10-11z'/></svg></span></span></span></span></span></span></span></span></span>)</li>
+</ul>
+<ol>
+<li>The final resulting image</li>
+</ol>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>I</mi><mtext>final </mtext></msub><mo>=</mo><mo>(</mo><mn>1</mn><mo>−</mo><mover accent="true"><mrow><mi>M</mi><mi>a</mi></mrow><mo stretchy="true">^</mo></mover><mo>)</mo><mo>∘</mo><mi>C</mi><mi>r</mi><mo>+</mo><mover accent="true"><mrow><mi>M</mi><mi>a</mi></mrow><mo stretchy="true">^</mo></mover><mo>∘</mo><mover accent="true"><mrow><mi>I</mi><mi>m</mi></mrow><mo stretchy="true">^</mo></mover></mrow><annotation encoding="application/x-tex">I_{\text {final }}=(1-\widehat{M a}) \circ C r+\widehat{M a} \circ \widehat{I m} 
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">final </span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.23333em;vertical-align:-0.25em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.98333em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">a</span></span></span><span class="svg-align" style="top:-3.6833299999999998em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.3em;"><svg width='100%' height='0.3em' viewBox='0 0 2364 300' preserveAspectRatio='none'><path d='M1181 0h2l1171 176c6 0 10 5 10 11l-2 23c-1 6-5 10
+-11 10h-1L1182 67 15 220h-1c-6 0-10-4-11-10l-2-23c-1-6 4-11 10-11z'/></svg></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∘</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.98333em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.98333em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">a</span></span></span><span class="svg-align" style="top:-3.6833299999999998em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.3em;"><svg width='100%' height='0.3em' viewBox='0 0 2364 300' preserveAspectRatio='none'><path d='M1181 0h2l1171 176c6 0 10 5 10 11l-2 23c-1 6-5 10
+-11 10h-1L1182 67 15 220h-1c-6 0-10-4-11-10l-2-23c-1-6 4-11 10-11z'/></svg></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∘</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.98333em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.98333em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault">m</span></span></span><span class="svg-align" style="top:-3.6833299999999998em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.3em;"><svg width='100%' height='0.3em' viewBox='0 0 2364 300' preserveAspectRatio='none'><path d='M1181 0h2l1171 176c6 0 10 5 10 11l-2 23c-1 6-5 10
+-11 10h-1L1182 67 15 220h-1c-6 0-10-4-11-10l-2-23c-1-6 4-11 10-11z'/></svg></span></span></span></span></span></span></span></span></span></span></p>
+<ol start="2">
+<li>Loss
+<ol>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>L</mi><mtext>mask </mtext></msub></mrow><annotation encoding="application/x-tex">L_{\text {mask }}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">mask </span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>蒙版的损失：二次交叉熵损失</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>L</mi><mrow><mi>i</mi><mi>m</mi></mrow></msub></mrow><annotation encoding="application/x-tex">L_{i m}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 预测的损失：L1 距离</li>
+</ol>
+</li>
+</ol>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mo>=</mo><msub><mi>L</mi><mtext>mask </mtext></msub><mo>+</mo><mi>λ</mi><msub><mi>L</mi><mrow><mi>i</mi><mi>m</mi></mrow></msub></mrow><annotation encoding="application/x-tex">L=L_{\text {mask }}+\lambda L_{i m} 
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">L</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">mask </span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord mathdefault">λ</span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<p class='katex-block katex-error' title='ParseError: KaTeX parse error: Undefined control sequence: \substack at position 46: …\cdot H} \sum_{\̲s̲u̲b̲s̲t̲a̲c̲k̲{0&lt;i&lt;1 \\ 0&lt;j&lt;W…'>L_{\text {mask }}=-\frac{1}{W \cdot H} \sum_{\substack{0&lt;i&lt;1 \\ 0&lt;j&lt;W}} M a_{i j} \log \widehat{M a_{i j}}+\left(1-M a_{i j}\right) \log \left(1-\widehat{M a_{i j}}\right)
+</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>L</mi><mrow><mi>i</mi><mi>m</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mi mathvariant="normal">∣</mi><mi>M</mi><mi>a</mi><mi mathvariant="normal">∣</mi></mrow></mfrac><mo>⋅</mo><msub><mi mathvariant="normal">ℓ</mi><mn>1</mn></msub><mo>(</mo><mi>P</mi><mi>i</mi><mi>x</mi><mo separator="true">,</mo><mover accent="true"><mrow><mi>P</mi><mi>i</mi><mi>x</mi></mrow><mo stretchy="true">^</mo></mover><mo>)</mo></mrow><annotation encoding="application/x-tex">L_{i m}=\frac{1}{|M a|} \cdot \ell_1(P i x, \widehat{P i x})
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.25744em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">a</span><span class="mord">∣</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.23333em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">ℓ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault">i</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.98333em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault">i</span><span class="mord mathdefault">x</span></span></span><span class="svg-align" style="top:-3.6833299999999998em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.3em;"><svg width='100%' height='0.3em' viewBox='0 0 2364 300' preserveAspectRatio='none'><path d='M1181 0h2l1171 176c6 0 10 5 10 11l-2 23c-1 6-5 10
+-11 10h-1L1182 67 15 220h-1c-6 0-10-4-11-10l-2-23c-1-6 4-11 10-11z'/></svg></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mi>i</mi><mi>x</mi><mo>=</mo><mi>I</mi><mi>m</mi><mo>∘</mo><mi>M</mi><mi>a</mi><mspace width="1em"/><mover accent="true"><mrow><mi>P</mi><mi>i</mi><mi>x</mi></mrow><mo stretchy="true">^</mo></mover><mo>=</mo><mover accent="true"><mrow><mi>I</mi><mi>m</mi></mrow><mo stretchy="true">^</mo></mover><mo>∘</mo><mi>M</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">P i x=I m \circ M a \quad \widehat{P i x}=\widehat{I m} \circ M a
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault">i</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∘</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.98333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:1em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.98333em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault">i</span><span class="mord mathdefault">x</span></span></span><span class="svg-align" style="top:-3.6833299999999998em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.3em;"><svg width='100%' height='0.3em' viewBox='0 0 2364 300' preserveAspectRatio='none'><path d='M1181 0h2l1171 176c6 0 10 5 10 11l-2 23c-1 6-5 10
+-11 10h-1L1182 67 15 220h-1c-6 0-10-4-11-10l-2-23c-1-6 4-11 10-11z'/></svg></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.98333em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.98333em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault">m</span></span></span><span class="svg-align" style="top:-3.6833299999999998em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.3em;"><svg width='100%' height='0.3em' viewBox='0 0 2364 300' preserveAspectRatio='none'><path d='M1181 0h2l1171 176c6 0 10 5 10 11l-2 23c-1 6-5 10
+-11 10h-1L1182 67 15 220h-1c-6 0-10-4-11-10l-2-23c-1-6 4-11 10-11z'/></svg></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∘</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">a</span></span></span></span></span></p>
+<ol start="3">
+<li>Add another decoder branch for inferring the original visual motif. [添加<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>V</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">V_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.22222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>]
+<ol>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>L</mi><mrow><mi>V</mi><mi>m</mi></mrow></msub></mrow><annotation encoding="application/x-tex">L_{V m}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.22222em;">V</span><span class="mord mathdefault mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 水印的损失：L1距离</li>
+</ol>
+</li>
+</ol>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mo>=</mo><msub><mi>L</mi><mtext>mask </mtext></msub><mo>+</mo><mi>λ</mi><mrow><mo fence="true">(</mo><msub><mi>L</mi><mrow><mi>i</mi><mi>m</mi></mrow></msub><mo>+</mo><msub><mi>L</mi><mrow><mi>V</mi><mi>m</mi></mrow></msub><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">L=L_{\text {mask }}+\lambda\left(L_{i m}+L_{V m}\right)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">L</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">mask </span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">λ</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.22222em;">V</span><span class="mord mathdefault mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span></span></span></span></span></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>L</mi><mrow><mi>V</mi><mi>m</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mi mathvariant="normal">∣</mi><mi>M</mi><mi>a</mi><mi mathvariant="normal">∣</mi></mrow></mfrac><msub><mi mathvariant="normal">ℓ</mi><mn>1</mn></msub><mo>(</mo><mi>V</mi><mi>m</mi><mo separator="true">,</mo><mover accent="true"><mover accent="true"><mrow><mi>V</mi><mi>m</mi></mrow><mo stretchy="true">^</mo></mover><mo stretchy="true">^</mo></mover><mo>)</mo></mrow><annotation encoding="application/x-tex">L_{V m}=\frac{1}{|M a|} \ell_1(V m, \widehat{\widehat{V m}})
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.22222em;">V</span><span class="mord mathdefault mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.25744em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">a</span><span class="mord">∣</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mord">ℓ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mord mathdefault">m</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.22333em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.98333em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mord mathdefault">m</span></span></span><span class="svg-align" style="top:-3.6833299999999998em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.3em;"><svg width='100%' height='0.3em' viewBox='0 0 2364 300' preserveAspectRatio='none'><path d='M1181 0h2l1171 176c6 0 10 5 10 11l-2 23c-1 6-5 10
+-11 10h-1L1182 67 15 220h-1c-6 0-10-4-11-10l-2-23c-1-6 4-11 10-11z'/></svg></span></span></span></span></span></span></span></span><span class="svg-align" style="top:-3.98333em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.24em;"><svg width='100%' height='0.24em' viewBox='0 0 1062 239' preserveAspectRatio='none'><path d='M529 0h5l519 115c5 1 9 5 9 10 0 1-1 2-1 3l-4 22
+c-1 5-5 9-11 9h-2L532 67 19 159h-2c-5 0-9-4-11-9l-5-22c-1-6 2-12 8-13z'/></svg></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mover accent="true"><mrow><mi>V</mi><mi>m</mi></mrow><mo stretchy="true">^</mo></mover><mo stretchy="true">^</mo></mover><mo>=</mo><mover accent="true"><mrow><mi>V</mi><mi>m</mi></mrow><mo stretchy="true">^</mo></mover><mo>∘</mo><mi>M</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">\widehat{\widehat{V m}}=\widehat{V m} \circ M a
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.22333em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.22333em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.98333em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mord mathdefault">m</span></span></span><span class="svg-align" style="top:-3.6833299999999998em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.3em;"><svg width='100%' height='0.3em' viewBox='0 0 2364 300' preserveAspectRatio='none'><path d='M1181 0h2l1171 176c6 0 10 5 10 11l-2 23c-1 6-5 10
+-11 10h-1L1182 67 15 220h-1c-6 0-10-4-11-10l-2-23c-1-6 4-11 10-11z'/></svg></span></span></span></span></span></span></span></span><span class="svg-align" style="top:-3.98333em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.24em;"><svg width='100%' height='0.24em' viewBox='0 0 1062 239' preserveAspectRatio='none'><path d='M529 0h5l519 115c5 1 9 5 9 10 0 1-1 2-1 3l-4 22
+c-1 5-5 9-11 9h-2L532 67 19 159h-2c-5 0-9-4-11-9l-5-22c-1-6 2-12 8-13z'/></svg></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.98333em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.98333em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mord mathdefault">m</span></span></span><span class="svg-align" style="top:-3.6833299999999998em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.3em;"><svg width='100%' height='0.3em' viewBox='0 0 2364 300' preserveAspectRatio='none'><path d='M1181 0h2l1171 176c6 0 10 5 10 11l-2 23c-1 6-5 10
+-11 10h-1L1182 67 15 220h-1c-6 0-10-4-11-10l-2-23c-1-6 4-11 10-11z'/></svg></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∘</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">a</span></span></span></span></span></p>
+<h5 id="3-network-architecture">3. Network architecture</h5>
+<h2 id=""><img src="https://huia711.GitHub.io/post-images/1706687275393.png" alt="" loading="lazy"></h2>
+<h4 id="font-colorbluemarkable-resultsfont"><font color=blue><em>Markable results</em></font></h4>
+<h5 id="1-performance">1. Performance</h5>
+<ol>
+<li><strong>Watermark removal</strong> comparison
+<ol>
+<li>峰值信噪比（PSNR）是一种衡量图像重建质量的指标，它通过计算原始图像与处理后图像之间的差异来衡量图像质量</li>
+<li>结构相似性指数（SSIM）是另一种衡量图像质量的方法，它考虑了图像的结构、亮度和对比度信息，更加贴近于人眼对图像质量的感知</li>
+</ol>
+</li>
+</ol>
+<figure data-type="image" tabindex="2"><img src="https://huia711.GitHub.io/post-images/1706687301099.png" alt="" loading="lazy"></figure>
+<ol start="2">
+<li>Quantitative inpainting results [图像修补]</li>
+</ol>
+<h5 id="2-ablation-study">2. Ablation study</h5>
+<ol>
+<li>The network configurations we compared include
+<ol>
+<li>auto-encoder U-Net model</li>
+<li>baseline two branches model</li>
+<li>Baseline + Vm</li>
+<li>baseline + shared Vm [share weight]</li>
+</ol>
+</li>
+</ol>
+<figure data-type="image" tabindex="3"><img src="https://huia711.GitHub.io/post-images/1706687374487.png" alt="" loading="lazy"></figure>
+<ol start="2">
+<li>the size of the shared weights / the number of residual blocks</li>
+</ol>
+<figure data-type="image" tabindex="4"><img src="https://huia711.GitHub.io/post-images/1706687387834.png" alt="" loading="lazy"></figure>
+<hr>
+<h4 id="font-colorblueother-notesfont"><font color=blue><em>Other notes</em></font></h4>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://huia711.GitHub.io/tag/3Zw1jA2L5/">
+            <span class="flex-auto">paper notes</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+        </div>
+
+        
+
+      </div>
+    </div>
+
+    <script src="https://huia711.GitHub.io/media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>

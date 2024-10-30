@@ -1,0 +1,570 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tech Notebook</title>
+<meta name="description" content="AI & Digital Frontier" />
+<link rel="shortcut icon" href="https://huia711.GitHub.io/favicon.ico?v=1730290531677">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://huia711.GitHub.io/styles/main.css">
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://huia711.GitHub.io">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://huia711.GitHub.io/images/avatar.png?v=1730290531677" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">Tech Notebook</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E5%89%8D%E5%BC%95">前引</a></li>
+<li><a href="#%E4%BC%A0%E7%BB%9F%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2">传统图像分割</a>
+<ul>
+<li><a href="#%E4%BC%A0%E7%BB%9F%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E6%96%B9%E6%B3%95">传统图像分割方法</a>
+<ul>
+<li><a href="#1%E5%9F%BA%E4%BA%8E%E9%98%88%E5%80%BC%E7%9A%84%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E6%96%B9%E6%B3%95">1.基于阈值的图像分割方法</a></li>
+<li><a href="#2%E5%9F%BA%E4%BA%8E%E5%8C%BA%E5%9F%9F%E7%9A%84%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E6%96%B9%E6%B3%95">2.基于区域的图像分割方法</a></li>
+<li><a href="#3%E5%9F%BA%E4%BA%8E%E8%BE%B9%E7%BC%98%E7%9A%84%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E6%96%B9%E6%B3%95">3.基于边缘的图像分割方法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2">语义分割</a>
+<ul>
+<li><a href="#%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E7%9A%84%E5%90%AB%E4%B9%89">语义分割的含义</a>
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%86%E5%89%B2">什么是分割</a></li>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%AF%AD%E4%B9%89">什么是语义</a></li>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2">什么是语义分割</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BB%8E%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E5%88%B0%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2">从图像分割到语义分割</a></li>
+<li><a href="#%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E7%9A%84%E8%AF%84%E4%BC%B0%E6%A0%87%E5%87%86">语义分割的评估标准</a>
+<ul>
+<li><a href="#1-%E7%B2%BE%E5%BA%A6">1. 精度</a></li>
+<li><a href="#2-%E6%95%88%E7%8E%87">2. 效率</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86">使用的数据集</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E6%97%B6%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2">实时语义分割</a>
+<ul>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E6%8A%80%E6%9C%AF">基于深度学习的语义分割技术</a>
+<ul>
+<li><a href="#1-cnn%E7%9A%84%E5%9F%BA%E7%A1%80dip%E6%8A%80%E6%9C%AF">1. CNN的基础DIP技术</a></li>
+<li><a href="#2-cnn%E7%9A%84%E6%94%B9%E8%BF%9B%E6%8A%80%E6%9C%AF">2. CNN的改进技术</a></li>
+<li><a href="#3-fcn%E7%9A%84%E6%94%B9%E8%BF%9B%E6%A8%A1%E5%9E%8B">3. FCN的改进模型</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E6%97%B6%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2-2">实时语义分割</a>
+<ul>
+<li><a href="#1-bisenet-%E7%BB%93%E6%9E%84">1. BiSeNet 结构</a></li>
+<li><a href="#2-bisenet-%E5%AE%9E%E9%99%85%E6%95%88%E6%9E%9C">2. BiSeNet 实际效果</a></li>
+<li><a href="#3-bisenet-%E6%80%A7%E8%83%BD">3. BiSeNet 性能</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Powered by <a href="https://github.com/huia711" target="_blank">Github</a></div>
+    <a class="rss" href="https://huia711.GitHub.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">从图像分割到实时语义分割</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2023-12-06 / 28 min read
+        </div>
+        
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://huia711.GitHub.io/post-images/Real-time-Semantic-Segmentation.gif" alt="">
+        
+        <div class="post-content yue">
+          <h1 id="前引">前引</h1>
+<p>当你看到这幅图时，请使用你的第一反应告诉我们图像里有什么？</p>
+<figure data-type="image" tabindex="1"><img src="https://huia711.GitHub.io/post-images/1702458093710.jpg" alt="" loading="lazy"></figure>
+<p>相信绝大多数人的答案都离不开“小狗”和“草地”两个词语，但你有没有想过，为什么你能将小狗和草地区分开来？</p>
+<p>这其实是因为你已经进行了语义分割，即按照人类的经验和常识将图像切分为了不同的图像组成元素。如果进一步细化你的分析过程，应该为下述步骤：</p>
+<ol>
+<li>识别图像元素，根据彩色、空间纹理、几何形状等特征，将图像分割为两个组成元素</li>
+<li>根据你的经验，将两个组成元素分别解释为“小狗”和“草地”</li>
+</ol>
+<p>在以上步骤中，第一步对应图像分割，此时你只能区分出图像里有什么不同的元素，但你并不知道区分出的元素是什么；而第二步对应语义分割，在这一步中，你将为区分出的元素赋予语义。</p>
+<p>按照以上分析步骤，我们先不从语义分割谈起，而是从语义分割的前一步——图像分割聊起。</p>
+<h1 id="传统图像分割">传统图像分割</h1>
+<p>图像分割是指根据灰度、彩色、空间纹理、几何形状等特征把图像划分成若干个互不相交的区域，使得这些特征在同一区域内表现出一致性或相似性，而在不同区域间表现出明显的不同。</p>
+<p>简单来说，就是在一副图像中，把目标从背景中分离出来，但是这些目标和背景分别是什么，我们无法得知。</p>
+<p>我们将介绍三种传统的图像分割方法。</p>
+<h2 id="传统图像分割方法">传统图像分割方法</h2>
+<h3 id="1基于阈值的图像分割方法">1.基于阈值的图像分割方法</h3>
+<p>基于阈值分割的基本思想：基于图像的灰度特征来计算一个或多个灰度阈值，并将图像中每个像素的灰度值与阈值相比较，最后将像素根据比较结果分到合适的类别中。</p>
+<p>因此如何准确地求得最佳灰度阈值成为该方法的关键，其中有固定阈值分割、直方图双峰法、迭代阈值分割与自适应阈值分割等方法。</p>
+<figure data-type="image" tabindex="2"><img src="https://huia711.GitHub.io/post-images/1702458179780.jpg" alt="基于阈值分割的示例图像" loading="lazy"></figure>
+<p>上图展示了通过固定阈值分割方法，来设定不同阈值对原图像的处理结果。</p>
+<p>该方法特别适用于目标与背景占据不同灰度级范围的图像，计算简单高效，但由于只考虑了像素点灰度值本身的特征，一般不考虑空间特征，因此对噪声较为敏感，鲁棒性不高。</p>
+<h3 id="2基于区域的图像分割方法">2.基于区域的图像分割方法</h3>
+<p>基于区域分割的基本思想：基于图像的相似性准则将图像分为不同区域块。</p>
+<p>该方法通常包含两种基于区域提取的方式：一种是区域生长，即从单个像素出发，逐步合成所需要的分割区域；另一种是区域分裂合并，即从全局出发，逐步分割至所需要的分割区域。因此如何确定合适的初始种子像素以及合理的生长准则 (对应于区域生长) 或者确定合适的区域分割准则 (对应于区域分裂合并) 成为该方法的关键。</p>
+<figure data-type="image" tabindex="3"><img src="https://huia711.GitHub.io/post-images/1702458200862.jpg" alt="基于区域分割的示例图像" loading="lazy"></figure>
+<p>该方法适用于相邻区域像素存在依赖关系的图像，具有对上下文信息的利用、特征一致性和对噪声具有鲁棒性等优点，但是其算法复杂度较高，且无法处理重叠区域等缺点。</p>
+<h3 id="3基于边缘的图像分割方法">3.基于边缘的图像分割方法</h3>
+<p>基于边缘分割的基本思想：通过比较相邻像素点的灰度值差异，来判断该像素点是否位于边界处，然后将所有处在边界处的像素点连接起来，形成边缘轮廓，从而将图像划分为不同的区域。</p>
+<blockquote>
+<p><strong>边缘检测技术</strong>通常可以按照处理的技术分为串行边缘检测和并行边缘检测。串行边缘检测是要想确定当前像素点是否属于检测边缘上的一点，取决于先前像素的验证结果。并行边缘检测是一个像素点是否属于检测边缘上的一点取决于当前正在检测的像素点以及与该像素点的一些临近像素点。</p>
+</blockquote>
+<p>该方法利用相邻区域的像素灰度值或颜色的不连续性来检测边缘点，其中常用的边缘检测算法包括Canny边缘检测、Sobel算子、Laplacian算子等。</p>
+<figure data-type="image" tabindex="4"><img src="https://huia711.GitHub.io/post-images/1702458220335.jpg" alt="基于边缘分割的示例图像" loading="lazy"></figure>
+<p>该方法能够快速、准确地定位图像的边界和轮廓，提供物体的几何形状和结构信息，对噪声具有鲁棒性，但在高细节区域中存在大量碎边缘，难以形成完整的大区域，且不能保证边缘的连续性以及封闭性。</p>
+<hr>
+<h1 id="语义分割">语义分割</h1>
+<p>前面我们已经介绍了传统的图像分割，而接下来要介绍的语义分割在图像分割的基础上做出来改进，不仅对图像进行了分割，而且对分割后的对象赋予了语义。</p>
+<p>我们将“语义分割”拆分成“分割”和“语义”来理解语义分割的含义。</p>
+<h2 id="语义分割的含义">语义分割的含义</h2>
+<h3 id="什么是分割">什么是分割</h3>
+<p>分割指的是图像分割，这是图像处理领域的重要分支。图像分割指将图像划分成互不相交的、有意义的子区域，在同一个区域的像素点具有一定的相关性，不同区域的像素点存在一定的差异性，即是对图片中有相同性质的像素赋予相同标签的过程。</p>
+<p>简单来说，就是将一张图片划分为不同元素的过程，元素划分的规则由划分者给出</p>
+<p>以文章开头五只小狗的图片来举例，图像分割可以理解为将这张图划分为五只小狗和绿色草地背景的过程，只是分割后的结果并不会告诉我们有五只小狗和绿色背景</p>
+<h3 id="什么是语义">什么是语义</h3>
+<p>“语义”在计算机领域指的是数据的含义，而在数字图像领域内，“语义”进一步细化为人类视觉系统对于图像的理解，这种理解能够帮助人类将当前图像和其他图像区分开</p>
+<p>具体来讲，图像的语义分为视觉层、对象层和概念层。</p>
+<p>视觉层即通常所理解的底层，即颜色、纹理和形状等等，这些特征都被称为底层特征语义</p>
+<p>对象层即中间层，通常包含了属性特征等，就是某一对象在某一时刻的状态</p>
+<p>概念层是高层，是图像表达出的最接近人类理解的东西。</p>
+<p>以文章开头五只小狗的图片来举例，</p>
+<p>视觉层是小狗的轮廓，草地的颜色等等，即图像内组成元素的属性</p>
+<p>对象层是小狗和绿色草地，即这张图的组成元素</p>
+<p>概念层可以是“五只小狗在草地上的合照”，即这张图表达出来的意思</p>
+<h3 id="什么是语义分割">什么是语义分割</h3>
+<p>现在，我们可以理解什么是语义分割了，语义分割就是以图像语义为分割规则对图像进行分割的过程，再具体一点，语义分割指：将图像中每个像素点与其对应的语义标签相关联，对每个像素点进行分类。</p>
+<p>值得一提的是，语义分割是图像分割的重要分支，图像分割还包括实例分析。</p>
+<p>语义分析相比于实例分析最大的区别在于：语义分割会为图像中的每个像素分配一个类别，但是同一类别之间的对象不会区分。而实例分割，只对特定的物体进行分类，也就是说，即使是同一个类别，实例分割也要区分同类的不同对象。</p>
+<h2 id="从图像分割到语义分割">从图像分割到语义分割</h2>
+<p>普通的<strong>图像分割</strong>，主要是通过提取图片的低级特征，然后进行分割。这个阶段一般是非监督学习，分割出来的结果并没有语义的标注，换句话说，分割出来的东西并不知道是什么。</p>
+<p>而语义分割，在普通的图像分割基础上，给每个像素点附上了语义信息，因此，与普通的图像分割分不同，语义分割显著的进步在于：我们不仅能分割不同物体，并且能知道每个物体的语义。换句话说，我们知道分割出来的是小狗、人等等，而不是一块块分割出来无法知道含义的区域。</p>
+<h2 id="语义分割的评估标准">语义分割的评估标准</h2>
+<h3 id="1-精度">1. 精度</h3>
+<p>在语义分割任务中，精度常用的评估指标为<strong>平均交并比</strong>(mean intersection over union, mIoU)。在计算mIoU时，通过比较预测图像与真实图像的像素集合之间的交集和并集，可以衡量语义分割算法的精度。</p>
+<p>具体来说，真实值和预测值都是像素集合，其中真实值表示图像中所有像素的标签，而预测值表示对每个像素进行预测后得到的标签。通过比较两个像素集合的交集和并集，可以计算出每个类别的IoU值，具体如下公式，表示该类别的预测结果与真实结果之间的相似程度。</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="normal">I</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">U</mi></mrow><mo>=</mo><mi>J</mi><mo>(</mo><mi>A</mi><mo separator="true">,</mo><mi>B</mi><mo>)</mo><mo>=</mo><mfrac><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∩</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∪</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\mathrm{IoU}=J(A, B)=\frac{|A \cap B|}{|A \cup B|}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathrm">I</span><span class="mord mathrm">o</span><span class="mord mathrm">U</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathdefault">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∪</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∩</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>通过计算每种类别的IoU，可以得到各类别的精度，即类别IoU。而平均交并比mIoU通过对每个类别的IoU值求平均得到，具体如下公式，其中, 假设共有 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 个类(其中包含一个空类或背景), <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>p</mi><mrow><mi>i</mi><mi>i</mi></mrow></msub></mrow><annotation encoding="application/x-tex">p_{i i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 表示预测与实际相符的像素, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>p</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">p_{i j}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.716668em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 表示实际属于类 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 但被预测为类 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span> 的像素, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>p</mi><mrow><mi>j</mi><mi>i</mi></mrow></msub></mrow><annotation encoding="application/x-tex">p_{j i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.716668em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 表示实际属于类 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span> 但被预测为类 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 的像素。 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 表示真实值, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span> 表示预测值, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>p</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">p_{i j}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.716668em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 表示将 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 预测为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span> 的像素个数。</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="normal">M</mi><mi mathvariant="normal">I</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">U</mi></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>k</mi></munderover><mfrac><msub><mi>p</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mrow><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>0</mn></mrow><mi>k</mi></munderover><msub><mi>p</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>+</mo><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>0</mn></mrow><mi>k</mi></munderover><msub><mi>p</mi><mrow><mi>j</mi><mi>i</mi></mrow></msub><mo>−</mo><msub><mi>p</mi><mrow><mi>i</mi><mi>i</mi></mrow></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">	\mathrm{MIoU}=\frac{1}{k+1} \sum_{i=0}^k \frac{p_{i j}}{\sum_{j=0}^k p_{i j}+\sum_{j=0}^k p_{j i}-p_{i i}}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathrm">M</span><span class="mord mathrm">I</span><span class="mord mathrm">o</span><span class="mord mathrm">U</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.150939em;vertical-align:-1.314826em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8361130000000003em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1075599999999999em;"><span style="top:-2.120992em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9890079999999999em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.43581800000000004em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9890079999999999em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.43581800000000004em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.314826em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<h3 id="2-效率">2. 效率</h3>
+<p>在实时语义分割任务中，效率常用的评估指标为<strong>每秒帧数</strong>(Frames Per Second，FPS)}<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>。具体来讲，FPS指的是模型在处理图像时的速度，即处理每一帧图像所需的时间。每秒帧数越高，意味着模型可以在单位时间内处理更多的帧数，处理速度更快。相比普通的语义分割应用，自动驾驶等实时语义分析的应用场景通常要求更高的FPS。</p>
+<h2 id="使用的数据集">使用的数据集</h2>
+<p>选择适合的数据集是训练和评估语义分割模型的关键，数据集的规模和成像条件对分割算法的鲁棒性有重要影响。常见的语义分割数据集有PASCALVOC、Microsoft COCO等等，而自动驾驶常用Cityscape，其主要由城市道路场景组成，符合实时语义分割的应用场景。</p>
+<p>下表列出了一些常用的公共数据集：</p>
+<table>
+<thead>
+<tr>
+<th>年代</th>
+<th>数据集名称</th>
+<th>内容特点</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2012</td>
+<td>PASCAL VOC</td>
+<td>含有 20 种类别，道路场景数据有着 11,520 张图片，包含着 27,450 个注释对象</td>
+<td>道路行人车辆</td>
+</tr>
+<tr>
+<td>2014</td>
+<td>Microsoft COCO</td>
+<td>包括 200 000 个图像和 8 个图像实例，已经公开了 5,000,000 个对 象实例，数据集中主要包括了室内场景和室外场景</td>
+<td>室内室外的常用场景</td>
+</tr>
+<tr>
+<td>2015</td>
+<td>Cityscape</td>
+<td>城市道路场景数据集，来自 50 个不同的城市街景记录的立体视频 序列，包括 20,000 张弱注释图片和 5000 张的高质量的强注释的图 片，涵盖了各种时间及天气变化下的街道动态物体</td>
+<td>道路车辆、行 人、街景</td>
+</tr>
+<tr>
+<td>2019</td>
+<td>CityFlow</td>
+<td>从 10 个路口提取的 40 个摄像头收集到的视频，是目前都市环境中 最大规模的数据集，包含超过 20 万个目标框</td>
+<td>道路场景</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="实时语义分割">实时语义分割</h1>
+<h2 id="基于深度学习的语义分割技术">基于深度学习的语义分割技术</h2>
+<p>根据上面对传统图像分割的分析，我们发现传统图像分割方法大多利用图像的表层信息，难以处理需要大量语义信息的分割任务。随着卷积神经网络(Convolutional Neural Network, CNN)<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>的出现，学者们开始引入卷积神经网络作为语义分割的工具。由于相比之下，神经网络提取图像深层特征的能力更强，因此基于深度学习的语义分割技术能够更加充分利用图像的语义信息。至此，图像语义分割方法进入到了卷积神经网络时期。</p>
+<p>其中，<strong>全卷积网络</strong>(Fully Convolutional Networks, FCN)<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup>是该时期的开创之作。</p>
+<blockquote>
+<p>其创新性地将CNN中的全连接层换为卷积层，并在网络最后对特征图进行反卷积操作。这样的做法主要有两点好处：第一，FCN最后输出一个分割图，而不是像CNN一样输出一维的分类结果，因此FCN是首个<strong>端到端</strong>的分割网络模型，更好的利用了图像像素之间的特征；第二，FCN能够接收<strong>任意尺寸</strong>的图像，可用性大大提升。</p>
+</blockquote>
+<h3 id="1-cnn的基础dip技术">1. CNN的基础DIP技术</h3>
+<p>下面将介绍一些深度学习为基础的语义分割中，基础且重要的DIP技术，以更好地理解实时语义分割模型BiSeNet。</p>
+<ol>
+<li><strong>卷积</strong>(Convolution)</li>
+</ol>
+<blockquote>
+<p><strong>卷积</strong>是CNN中最为关键的操作之一，主要用于图像特征提取。卷积操作是将一个滤波器（也称为卷积核）应用于图片中的像素点上，并计算其与周围像素的加权和，得到一个新的特征图。具体过程如下图<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup>，该图中蓝色为原图，阴影部份为卷积核，青色为卷积后得到的特征，可以看到第一个特征即为左上角像素与卷积核的乘积之和。<br><br>
+卷积操作的核心思想是<strong>共享参数</strong>。将一个滤波器应用于图片上的每一个像素点时，它们之间的权重参数是相同的。这样既可以减少模型的参数数量，也可以有效地提取图像的局部特征，从而在图像分类、物体识别、目标检测、图像分割等任务中发挥重要作用。</p>
+</blockquote>
+<figure data-type="image" tabindex="5"><img src="https://huia711.GitHub.io/post-images/1701856052198.gif" alt="卷积操作示意图" loading="lazy"></figure>
+<ol start="2">
+<li><strong>池化</strong>(pooling)</li>
+</ol>
+<blockquote>
+<p><strong>池化</strong>也是CNN常用的操作之一，主要用于降低特征图的空间维度，减少卷积神经网络中参数量和计算量，经常被用作<strong>下采样</strong>(simpling)操作。以最大池化为例，它的操作非常简单：将特征图按照一个固定的步长进行扫描，并从每个局部区域中选择最大的数值作为该区域的池化输出。具体过程如下图。</p>
+</blockquote>
+<figure data-type="image" tabindex="6"><img src="https://huia711.GitHub.io/post-images/1701856531626.gif" alt="池化操作示意图" loading="lazy"></figure>
+<h3 id="2-cnn的改进技术">2. CNN的改进技术</h3>
+<p>当CNN应对更复杂的问题，如语义分割时，它的一些性能问题也逐渐暴露出来。因此，为了提高其可用性和实时性，学者们提出了一些降低模型复杂度、提高模型性能的技术。</p>
+<ol>
+<li><strong>深度可分离卷积</strong>(depthwise separable convolution, DSC)</li>
+</ol>
+<blockquote>
+<p><strong>深度可分离卷积</strong>最早在《Network In Network》中首次提出，随后便风靡各种卷积神经网络。其旨在减少计算和<strong>减小模型大小</strong>，并提高模型的效率和性能。具体来说，它将卷积操作分为逐通道卷积和逐点卷积两部分。逐通道卷积即每个通道一个卷积核，进行一次卷积；逐点卷积即使用<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>×</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1\times1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>卷积核，对每一个像素进行卷积。<br><br>
+举一个例子来论证其性能的优越性：假设输入特征图的尺寸为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>D</mi><mi>k</mi></msub><mo>×</mo><msub><mi>D</mi><mi>k</mi></msub><mo>×</mo><mi>M</mi></mrow><annotation encoding="application/x-tex">D_k \times D_k \times M</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span></span></span></span>，卷积核的尺寸为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>D</mi><mi>F</mi></msub><mo>×</mo><msub><mi>D</mi><mi>F</mi></msub><mo>×</mo><mi>M</mi></mrow><annotation encoding="application/x-tex">D_F \times D_F \times M</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span></span></span></span> ，其数量为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span>。则对于普通卷积， <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span>个卷积核共需要进行<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>D</mi><mi>k</mi></msub><mo>×</mo><msub><mi>D</mi><mi>k</mi></msub><mo>×</mo><msub><mi>D</mi><mi>F</mi></msub><mo>×</mo><msub><mi>D</mi><mi>F</mi></msub><mo>×</mo><mi>M</mi><mo>×</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">D_k \times D_k \times D_F \times D_F \times M \times N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span>次计算；而对于DSC，首先进行逐通道卷积，计算 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>D</mi><mi>k</mi></msub><mo>×</mo><msub><mi>D</mi><mi>k</mi></msub><mo>×</mo><msub><mi>D</mi><mi>F</mi></msub><mo>×</mo><msub><mi>D</mi><mi>F</mi></msub><mo>×</mo><mi>M</mi></mrow><annotation encoding="application/x-tex">D_k \times D_k \times D_F \times D_F \times M</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span></span></span></span>次，然后进行逐点卷积，需要<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>M</mi><mo>×</mo><mi>N</mi><mo>×</mo><msub><mi>D</mi><mi>K</mi></msub><mo>×</mo><msub><mi>D</mi><mi>K</mi></msub></mrow><annotation encoding="application/x-tex">M \times N \times D_K \times D_K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">K</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">K</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>次运算，即一共<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>D</mi><mi>k</mi></msub><mo>×</mo><msub><mi>D</mi><mi>k</mi></msub><mo>×</mo><msub><mi>D</mi><mi>F</mi></msub><mo>×</mo><msub><mi>D</mi><mi>F</mi></msub><mo>×</mo><mi>M</mi><mo>+</mo><mi>M</mi><mo>×</mo><mi>N</mi><mo>×</mo><msub><mi>D</mi><mi>K</mi></msub><mo>×</mo><msub><mi>D</mi><mi>K</mi></msub></mrow><annotation encoding="application/x-tex">D_k \times D_k \times D_F \times D_F \times M + M \times N \times D_K \times D_K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">K</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">K</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>。两者的比值为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mn>1</mn><mi>N</mi></mfrac><mo>+</mo><mfrac><mn>1</mn><msubsup><mi>D</mi><mi>F</mi><mn>2</mn></msubsup></mfrac></mrow><annotation encoding="application/x-tex">\frac{1}{N} + \frac{1}{D_F^2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.4561929999999998em;vertical-align:-0.611085em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.62642em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8051142857142857em;"><span style="top:-2.160707142857143em;margin-left:-0.02778em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">F</span></span></span><span style="top:-2.8448em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3392928571428572em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.611085em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>，因此DSC性能明显好于普通卷积。具体操作如下图<sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup>。</p>
+</blockquote>
+<figure data-type="image" tabindex="7"><img src="https://huia711.GitHub.io/post-images/1701949190829.gif" alt="深度可分离卷积示意图" loading="lazy"></figure>
+<ol>
+<li><strong>全局平均池化</strong>(global average pooling, GAP)</li>
+</ol>
+<blockquote>
+<p><strong>全局平均池化</strong>被大家熟知于Xception和MobileNet这两个著名的模型。它是一种经典的<strong>图像降维</strong>方法，主要用于代替全连接层(FC)，相比全连接操作，它可以大大减少参数，极大加速计算过程。它将整个特征图像转换为一个<strong>数值</strong>，作为该特征通道的汇总特征。它的操作非常简单：对每一个通道的特征图的所有像素进行平均，从而达到压缩空间维度和去除冗余信息的效果。与FC的对比如下图。</p>
+</blockquote>
+<figure data-type="image" tabindex="8"><img src="https://huia711.GitHub.io/post-images/1701950355489.png" alt="全局平均池化示意图" loading="lazy"></figure>
+<h3 id="3-fcn的改进模型">3. FCN的改进模型</h3>
+<p>除了最基础的CNN架构的改进，学者们还提出了许多针对语义分割的改进。在FCN之后，基于深度学习的语义分割技术开始井喷式发展。针对FCN仍存在的诸多缺陷，如参数过多、缺少上下文特征、内存占用等，学者们在FCN的基础框架上，提出了一些性能更优异的新模型。</p>
+<ol>
+<li><strong>DeepLab V1</strong><sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup></li>
+</ol>
+<blockquote>
+<p><strong>DeepLab V1</strong>创新性地提出了<strong>空洞卷积</strong>(atrous convolution)的概念，其主要作用是<strong>扩大感受野</strong>。在FCN中使用池化操作来扩大感受野，而传统的池化操作会丢失一些信息，并且就算上采样(unsimpling)也无法还原，从而影响分割的精度。而空洞卷积则是一种不使用池化的方式扩大感受野的方法。<br><br>
+具体来说，其通过往卷积操作中加入空洞（值为0的点）来增加感受野，引入扩张率这个超参来制定空洞卷积上两个有效值之间的距离，扩张率越大，感受野越大。<br><br>
+空洞卷积与普通卷积的对比具体如下图，可以看到普通卷积在该层的感受野为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>3</mn><mo>×</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">3\times3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span>；而扩张率为1的空洞卷积，每个有效像素之间都隔一个空洞0，最后在该层的为感受野<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>5</mn><mo>×</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">5\times5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">5</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span></span></span></span>。</p>
+</blockquote>
+<div style="text-align:center">
+<span style="width:47%;display:inline-block">
+<figure data-type="image" tabindex="9"><img src="https://huia711.GitHub.io/post-images/1701869924157.gif" alt="空洞卷积" loading="lazy"></figure>
+</span>
+<span style="width:47%;display:inline-block">
+<figure data-type="image" tabindex="10"><img src="https://huia711.GitHub.io/post-images/1701869670244.gif" alt="普通卷积" loading="lazy"></figure>
+</span>
+</div>
+<ol start="2">
+<li><strong>金字塔场景解析网络</strong>(PSPNet)<sup class="footnote-ref"><a href="#fn7" id="fnref7">[7]</a></sup></li>
+</ol>
+<blockquote>
+<p><strong>金字塔场景解析网络</strong>创新性同时使用局部和全局特征，使得结果更加可靠。在PSPNet的金字塔池化模块(Pyramid Pooling Module, PPM)中，首先通过<strong>金字塔池化</strong>(pyramid pooling)从CNN最后一层特征中产生的不同level的特征，以收集不同的子区域特征；各自通过卷集之后，再<strong>拼接</strong>(concatenate)融合各子区域特征，以形成包含局部和全局上下文信息的特征表征，解决了FCN缺少上下文特征的缺陷。<br><br>
+由于金字塔池化的过程中使用了<strong>全局平均池化</strong>来捕获全局特征，因此间接证明了GAP可有效提高语义分割性能。<br><br>
+具体过程可以参考下图，金字塔池化即为红色箭头，黄色模块代表了全局池化结果；[~]之中为金字塔池化模块；在模块中经过卷积后，白色箭头为上采样操作，将不同level的特征重新融合；最后进行串联，将局部和全局特征融合。</p>
+</blockquote>
+<figure data-type="image" tabindex="11"><img src="https://huia711.GitHub.io/post-images/1701867790541.png" alt="金字塔池化模块" loading="lazy"></figure>
+<hr>
+<h2 id="实时语义分割-2">实时语义分割</h2>
+<p>事实上，上述基于FCN的改进模型，如DeepLab、PSPNet等已经高度可用了。很多模型的性能标准平均交并比(mIOU)都可以达到80%及以上。但它们为了追求更好的性能，网络中的参数大都尤为复杂，导致计算成本较大、推理速度较慢。这显然不能满足<strong>实时</strong>的应用场景，如自动驾驶等。</p>
+<p>因此为了在精确的时间间隔内实现语义分割，需要构建一个内存小、推理速度快、精度高的轻量化网络，语义分割的一个子方向——<strong>实时语义分割</strong>就此诞生。接下来，我将简单梳理一下实时语义分割领域的经典模型。</p>
+<ol>
+<li>Encoder-Decoder的轻量化模型：ENet、SegNet、ICNet等</li>
+</ol>
+<blockquote>
+<p><strong>ENet</strong>是最早的针对实时语义分割进行优化的模型。它<strong>减少了最后下采样的次数</strong>，采用不对称的encoder-decoder模型，轻量化decoder。并且采用了分解卷积、以<strong>空洞卷积</strong>来取代卷积等方法，加速模型生成速度。虽然速度的确提升了，但由于它抛弃了最后阶段的下采样，因此模型的感受野不足以涵盖大物体，导致判别能力较差。</p>
+</blockquote>
+<blockquote>
+<p><strong>SegNet</strong>由剑桥大学团队开发，并在驾驶场景中进行了许多实际应用。它的核心思想是通过减少网络通道数量加快处理速度，具体来说，它用<strong>池化</strong>实现上采样操作，以<strong>代替反卷积</strong>(deconvolution)，从而减少了参数数量。但由于这种代替实际上也影响了分割结果，导致其精度上对比FCN并没有明显的优势。</p>
+</blockquote>
+<ol start="2">
+<li>双分支结构模型：BiSeNet v1、BiSeNet v2、STDCNet等</li>
+</ol>
+<blockquote>
+<p>在2018年的ECCV上，旷视科技提出一个实时语义分割的新模型——<strong>双向分割网络</strong>(Bilateral Segmentation Network/BiSeNet)<sup class="footnote-ref"><a href="#fn8" id="fnref8">[8]</a></sup>。该模型抛弃了计算量较大的U形结构，转而使用<strong>Spatial Path</strong>(SP)来获取空间信息，生成深层特征；同时使用<strong>Context Path</strong>(CP)来扩大感受野，生成浅层特征，从而形成了高效的双分支结构（如下图）。</p>
+</blockquote>
+<p>接下来将以最具代表性的<strong>双分支结构模型</strong>——<strong>BiSeNet</strong>为代表，详细介绍其结构、实现、效果和性能，深入了解实时语义分割模型。</p>
+<figure data-type="image" tabindex="12"><img src="https://huia711.GitHub.io/post-images/1701870420946.png" alt="U形模型与BiSeNet对比图" loading="lazy"></figure>
+<h3 id="1-bisenet-结构">1. BiSeNet 结构</h3>
+<p>以之前的基础DIP技术、CNN改进技术和FCN的改进模型为基础，深入解析<strong>BiSeNet</strong>的模型结构。其中，BiSeNet包含两个部分（分支）：<strong>Spatial Path</strong>和<strong>Context Path</strong>。</p>
+<p>从主体结构上看，<strong>Spatial Path</strong>进行卷积操作，以获取空间信息，生成浅层空间特征；而<strong>Context Path</strong>进行下采样，以扩大感受野，生成深层特征；然后利用<strong>特征融合模块</strong>(Feature Fusion Module, FFM)整合两个分支的特征；最后，将得到的特征上采样，重新将特征图扩大到原图大小，即可得到语义分割的结果。</p>
+<p>下面将会分别介绍BiSeNet的三个关键模块：Context Path、Spatial Path、Feature Fusion Module。</p>
+<figure data-type="image" tabindex="13"><img src="https://huia711.GitHub.io/post-images/1701870865199.png" alt="BiSeNet双分支结构示意图" loading="lazy"></figure>
+<ol>
+<li>Spatial Path</li>
+</ol>
+<blockquote>
+<p>在语义分割任务中，<strong>空间分辨率</strong>和<strong>感受野</strong>都对效果有举足轻重的作用，前者对应浅层的特征，后者对应深层特征。大多数的模型为了平衡两者，往往需要庞大的参数和复杂的结构。在实时语义分析加入<strong>效率</strong>的标准后，这个“三角”结构更加难以平衡。<br><br>
+在早期的实时语义分析中，部份模型通过剪裁或缩放来限定输入大小来加速模型。除此之外，部份模型通过减少网络通道数量加快处理速度，如<strong>SegNet</strong>。但是无论是剪裁还是减少通道数都会影响模型的空间分辨率，进而影响分割结果。<br><br>
+因此BiSeNet提出Spatial Path，以单独保留原输入图像的空间特征。如下图所示，其结构非常简单，就是三层<strong>经典的卷积层</strong>，包含卷积操作、批归一化和ReLU。其中卷积的步幅(stride)为2，因此经过三层后特征图大小为原图的1/8。较大的特征图使其可以编码丰富的空间信息。</p>
+</blockquote>
+<figure data-type="image" tabindex="14"><img src="https://huia711.GitHub.io/post-images/1701870950605.png" alt="Spatial Path结构示意图" loading="lazy"></figure>
+<ol start="2">
+<li>Context Path</li>
+</ol>
+<blockquote>
+<p>在早期的实时语义分析中，部份模型为追求极其紧凑的框架而丢弃模型的最后阶段，从而加速模型，如<strong>ENet</strong>。<br><br>
+除此之外，还有模型会通过如DeepLab V1/V2提出的<strong>空洞卷积、空间金字塔池化</strong>来提高感受野，但这些操作比较耗费计算和内存，导致模型速度慢。<br><br>
+因此BiSeNet提出Context Path，利用<strong>轻量级模型</strong>与<strong>全局平均池化</strong>以提供大感受野。如下图所示，第一，其采用预训练的轻量级模型<strong>Xception</strong>作为骨干(backbone)，其与普通的CNN最大的不同之处在于，使用了<strong>深度可分离卷积</strong>代替普通卷积操作，大大减少了参数数量。<br><br>
+第二，借助U形结构的思想，<strong>拼接(concatenate)<strong>融合最后两个阶段的特征，即将各阶段的特征维度相加地拼接为一个特征。<br><br>
+第三，在最后两阶段特征融合融合之前，先通过</strong>注意力优化模块</strong>(Attention Refinment Module, ARM)。其具体结构如下图所示，ARM借助<strong>全局平均池化</strong>捕获全局语境并计算注意力向量以指导特征学习。这一设计可以优化 Context Path 中每一阶段的输出特征，无需任何上采样操作即可轻易整合全局语境信息，极大降低计算成本。</p>
+</blockquote>
+<div style="text-align:center">
+<span style="width:47%;display:inline-block">
+<figure data-type="image" tabindex="15"><img src="https://huia711.GitHub.io/post-images/1701871631935.png" alt="Context Path" loading="lazy"></figure>
+</span>
+<span style="width:47%;display:inline-block">
+<figure data-type="image" tabindex="16"><img src="https://huia711.GitHub.io/post-images/1701871673322.png" alt="注意力优化模块" loading="lazy"></figure>
+</span>
+</div>
+<ol start="3">
+<li>Feature Fusion Module</li>
+</ol>
+<blockquote>
+<p>由于Spatial Path主要用于捕获空间信息，编码细节信息；而Context Path则主要编码语境信息，提取高层级特征。因此，他们不能简单地权重相连，需要一个网络模块来融合这些低层级和高层级的特征，以更好地保留图像的细节信息和语境信息。<strong>特征融合模块(Feature Fusion Module, FFM)<strong>应运而生。<br><br>
+其具体结构如下图，首先将Spatial Path和Context Path的输出特征进行</strong>拼接(concatenate)</strong>；然后，通过一个卷积层以融合特征；下一步，把相连的特征<strong>全局平均池化</strong>为一个特征向量，计算出一个权重向量。这一权重向量用于重新加权特征，起到特征选择和结合的作用。</p>
+</blockquote>
+<figure data-type="image" tabindex="17"><img src="https://huia711.GitHub.io/post-images/1701871763033.png" alt="特征融合模块结构" loading="lazy"></figure>
+<!-- ### 2. BiSeNet 代码实现 -->
+<h3 id="2-bisenet-实际效果">2. BiSeNet 实际效果</h3>
+<p>为了更直观地了解语义分割，以及基于BiSeNet模型的语义分析效果，我复现了<a href="https://github.com/CoinCheung/BiSeNet">Github</a><sup class="footnote-ref"><a href="#fn9" id="fnref9">[9]</a></sup>上的一个 基于BiSeNet的语义分割项目，并分别使用Cityscape数据集的街景图像测试其语义分割效果，以及游戏Grand Theft Auto V(GTA5)的街景视频测试其在其他情况下的迁移性。</p>
+<ol>
+<li>项目背景</li>
+</ol>
+<blockquote>
+<ul>
+<li>该项目分别实现了<strong>BiSeNet v1</strong>和<strong>BiSeNet v2</strong>两个模型，可自由切换使用。</li>
+<li>使用 ResNet18作为骨干网络，输入数据进行特征提取。</li>
+<li>使用<strong>Cityscape</strong>数据、<strong>COCO</strong>和<strong>ade20k</strong>作为训练集进行训练，并且使用对应的测试集进行评估和测试。它们所针对的类别有所不同，如Cityscape针对道路，而COCO针对建筑外景等。</li>
+<li>为了测试模型在不同场景下的迁移性能，还使用了游戏GTA5的测试数据的街景视频作为测试项，这些数据都是<strong>个人手动录制</strong>的。</li>
+</ul>
+</blockquote>
+<ol start="2">
+<li>Cityscape测试集结果</li>
+</ol>
+<div style="text-align:center">
+<span style="width:47%;display:inline-block">
+<figure data-type="image" tabindex="18"><img src="https://huia711.GitHub.io/post-images/1701967399756.png" alt="原图" loading="lazy"></figure>
+</span>
+<span style="width:47%;display:inline-block">
+<figure data-type="image" tabindex="19"><img src="https://huia711.GitHub.io/post-images/1701967447311.jpg" alt="语义分割结果" loading="lazy"></figure>
+</span>
+</div>
+<ol start="3">
+<li>游戏GTA5视频测试结果</li>
+</ol>
+<figure data-type="image" tabindex="20"><img src="https://huia711.GitHub.io/post-images/1702457375934.gif" alt="视频测试结果1" loading="lazy"></figure>
+<figure data-type="image" tabindex="21"><img src="https://huia711.GitHub.io/post-images/1702458025735.gif" alt="视频测试结果2" loading="lazy"></figure>
+<h3 id="3-bisenet-性能">3. BiSeNet 性能</h3>
+<p>BiseNet作对比之前的实时语义分割模型，如ENet等在速度与精度上都有显著地提升。且在这之后，许多双分支结构模型在BiSeNet V1的基础上进行改进，如BiSeNet V2改进了两路特征融合、STDCNet引入了DenseNet中的思想等等，已经成为实时语义分割的重要技术分支。</p>
+<ol>
+<li>对比实时语义分割模型</li>
+</ol>
+<blockquote>
+<p>根据旷视科技团队官方给出的数据，在不采用任何测试技巧，比如多尺度或多次裁剪测试的情况下，使用Cityscapes 测试数据集，输入分辨率为1536×768的图像，测试的mIOU和FPS结果如下表。可以看到对比之前的SegNet、ENet、ICNet等模型，其在速度和精度方面都有巨大提升。</p>
+</blockquote>
+<figure data-type="image" tabindex="22"><img src="https://huia711.GitHub.io/post-images/1702006599799.jpg" alt="对比实时语义分割模型" loading="lazy"></figure>
+<ol start="2">
+<li>对比语义分割模型</li>
+</ol>
+<blockquote>
+<p>BiSeNet除了对实时语义分割模型有优势外，在对比其他语义分割模型的情况下，精度也处于领先地位。下图展示了BiSeNet v1和BiSeNet v2在mIOU-FPS坐标系中的坐标，可以看到BiSeNet在精度和速度上领先大部份模型，位于一个具有优势的平衡点。</p>
+</blockquote>
+<figure data-type="image" tabindex="23"><img src="https://huia711.GitHub.io/post-images/1701870434216.png" alt="BiSeNet v1/v2性能示意图" loading="lazy"></figure>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>HE Jiafeng, CHEN Hongwei, LUO Dehan. Review of Real-Time Semantic Segmentation Algorithms for Deep Learning[J]. Computer Engineering and Applications, 2023, 59(8): 13-27. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>A. S. Razavian, H. Azizpour, J. Sullivan and S. Carlsson, &quot;CNN Features Off-the-Shelf: An Astounding Baseline for Recognition,&quot; 2014 IEEE Conference on Computer Vision and Pattern Recognition Workshops, Columbus, OH, USA, 2014, pp. 512-519, doi: 10.1109/CVPRW.2014.131. <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>J. Long, E. Shelhamer and T. Darrell, &quot;Fully convolutional networks for semantic segmentation,&quot; 2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), Boston, MA, USA, 2015, pp. 3431-3440, doi: 10.1109/CVPR.2015.7298965. <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p>https://github.com/vdumoulin/conv_arithmetic <a href="#fnref4" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn5" class="footnote-item"><p>https://animatedai.github.io/ <a href="#fnref5" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn6" class="footnote-item"><p>L. -C. Chen, G. Papandreou, I. Kokkinos, K. Murphy and A. L. Yuille, &quot;DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs,&quot; in IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 40, no. 4, pp. 834-848, 1 April 2018, doi: 10.1109/TPAMI.2017.2699184. <a href="#fnref6" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn7" class="footnote-item"><p>H. Zhao, J. Shi, X. Qi, X. Wang and J. Jia, &quot;Pyramid Scene Parsing Network,&quot; 2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), Honolulu, HI, USA, 2017, pp. 6230-6239, doi: 10.1109/CVPR.2017.660. <a href="#fnref7" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn8" class="footnote-item"><p>Yu C, Wang J, Peng C, et al. Bisenet: Bilateral segmentation network for real-time semantic segmentation[C]//Proceedings of the European conference on computer vision (ECCV). 2018: 325-341. <a href="#fnref8" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn9" class="footnote-item"><p>https://github.com/CoinCheung/BiSeNet <a href="#fnref9" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://huia711.GitHub.io/tag/55aI3SldX/">
+            <span class="flex-auto">technical article</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+        </div>
+
+        
+
+      </div>
+    </div>
+
+    <script src="https://huia711.GitHub.io/media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>
